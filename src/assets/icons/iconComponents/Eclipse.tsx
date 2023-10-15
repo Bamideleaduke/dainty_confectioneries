@@ -1,0 +1,24 @@
+import { SvgIcon, SvgIconProps } from "@mui/material";
+/* eslint-disable max-len */
+
+const Eclipse = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props}>
+      <svg
+        width="1085"
+        height="1085"
+        viewBox="0 0 1085 1085"
+        fill="#D4D4E9"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1085 542.5C1085 842.115 842.115 1085 542.5 1085C242.886 1085 0 842.115 0 542.5C0 242.886 242.886 0 542.5 0C842.115 0 1085 242.886 1085 542.5ZM212.349 542.5C212.349 724.838 360.162 872.651 542.5 872.651C724.838 872.651 872.651 724.838 872.651 542.5C872.651 360.162 724.838 212.349 542.5 212.349C360.162 212.349 212.349 360.162 212.349 542.5Z"
+          fill="#D4D4E9"
+          fill-opacity="0.19"
+        />
+      </svg>
+    </SvgIcon>
+  );
+};
+
+export default Eclipse;
