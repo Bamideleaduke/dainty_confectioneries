@@ -27,6 +27,7 @@ const CakeDescription: React.FC<DataProps> = ({
                       display: "flex",
                       flexDirection: "column",
                       boxShadow: "2px 1px 9px 0px rgba(0,0,0,0.75)",
+                      width: "300px",
                     }}
                   >
                     <Box component="img" src={item.image} alt={item.type} />
@@ -64,7 +65,7 @@ const CakeDescription: React.FC<DataProps> = ({
                         );
                       }
                     )}
-                    <Box
+                    {/* <Box
                       sx={{
                         display: { sm: "flex" },
                         alignItems: "center",
@@ -73,7 +74,7 @@ const CakeDescription: React.FC<DataProps> = ({
                       }}
                     >
                       <Button>Add to cart</Button>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Box>
               </Grid>

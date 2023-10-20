@@ -85,13 +85,21 @@ const CustomizationForm: React.FC<DataProps> = ({ data, id }) => {
                 label={"Personalized message on cake:"}
                 placeholder="Personalized message on cake"
               />
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
+
+              <Box
+                sx={{
+                  display: { sm: "flex" },
+                  alignItems: "center",
+                  justifyContent: { xs: "center", sm: "center" },
+                  marginTop: { xs: "1rem", sm: "2rem" },
+                }}
+              >
                 <Button
                   onClick={() => {
                     navigate(`${RouteList.CART}`);
                   }}
                 >
-                  Continue
+                  Add to cart
                 </Button>
               </Box>
             </Box>

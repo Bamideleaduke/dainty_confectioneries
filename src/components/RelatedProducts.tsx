@@ -17,7 +17,7 @@ const RelatedProducts = ({ data, id }: DataProps) => {
     .map((item: Item) => Object.values(item.items))
     .flat()
     .find((cake: any) => cake.id === itemId);
-
+    console.log("related prod",selectedCakeItem?.image)
   if (selectedCakeItem) {
     dispatch(selectCake(selectedCakeItem));
   }

@@ -34,7 +34,7 @@ const ProductItem = ({ data }: any) => {
 
     if (selectedCakeItem) {
       dispatch(selectCake(selectedCakeItem));
-      localStorage.setItem("selectedCake", JSON.stringify(selectedCakeItem));
+      // localStorage.setItem("selectedCake", JSON.stringify(selectedCakeItem));
     }
     navigate(`/product-description/${itemId}`);
   };

@@ -1,37 +1,41 @@
 import { useState, ReactNode } from "react";
-import TextField from "@mui/material/TextField";
+import TextField, { TextFieldVariants } from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FormLabel, Box, Typography } from "@mui/material";
-import {
-  PickerChangeHandlerContext,
-  DateValidationError,
-} from "@mui/x-date-pickers";
+// import {
+//   PickerChangeHandlerContext,
+//   DateValidationError,
+// } from "@mui/x-date-pickers";
 // import { ErrorMessage } from "formik";
 
 // Define the type for your component props
 interface DateInputProps {
+  //   id: string|number;
   label: string;
   name: string;
   error: string | undefined;
+  onChange?: (v: string) => void;
   //   onChange: (date: Date) => void;
-  onChange: (
-    value: Date | null,
-    context: PickerChangeHandlerContext<DateValidationError>
-  ) => void;
-  minDate?: Date;
-  maxDate?: Date;
+  //   onChange: (
+  //     value: Date,
+  //     context: PickerChangeHandlerContext<DateValidationError>
+  //   ) => void;
+  minDate?: string | number | null;
+  maxDate?: string | number | Date;
   disablefuture?: boolean;
   disablePast?: boolean;
   required?: ReactNode;
-  value: Date | null;
-  variant?: string;
-  // Add other props here as needed
+  value?: string | number | Date;
+  variant?: TextFieldVariants;
+  inputFormat: string; // Add the inputFormat property
+  id: string;
 }
 
 const DateInput: React.FC<DateInputProps> = (props) => {
   const {
+    // id,
     label,
     name,
     error,
@@ -43,6 +47,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
     required,
     value,
     variant,
+    inputFormat,
     ...rest
   } = props;
 
@@ -81,42 +86,43 @@ const DateInput: React.FC<DateInputProps> = (props) => {
               {required}
             </Typography>
           </FormLabel>
-          <DesktopDatePicker
+          {/* <DesktopDatePicker
             views={["year", "month", "day"]}
             disableFuture={disablefuture}
             disablePast={disablePast}
             maxDate={maxDate}
-            onChange={onChange}
+            onChange={(newValue) => onChange && onChange(newValue as string)}
             openTo="year"
             // inputFormat="DD-MM-YYYY"
             // id={name}
             onClose={() => setToggleDate(false)}
             value={value}
             open={toggleDate}
-            // renderInput={(params) => (
-            //   <TextField
-            //     variant={variant}
-            //     sx={{
-            //       paddingTop: variant ? "15px" : "10px",
-            //       paddingBottom: "20px",
-            //       "& .MuiFilledInput-root:before": {
-            //         border: "0",
-            //         outline: "none",
-            //       },
-            //       "& .MuiInputBase-root.Mui-disabled": {
-            //         backgroundColor: "#F3F3F3",
-            //       },
-            //     }}
-            //     fullWidth
-            //     label={label}
-            //     onClick={() => {
-            //       setToggleDate(true);
-            //     }}
-            //     {...params}
-            //     {...rest}
-            //   />
-            // )}
-          />
+            renderInput={(params: () => void) => (
+              <TextField
+                {...params}
+                variant={variant ?? "outlined"}
+                sx={{
+                  paddingTop: variant ? "15px" : "10px",
+                  paddingBottom: "20px",
+                  "& .MuiFilledInput-root:before": {
+                    border: "0",
+                    outline: "none",
+                  },
+                  "& .MuiInputBase-root.Mui-disabled": {
+                    backgroundColor: "#F3F3F3",
+                  },
+                }}
+                fullWidth
+                label={label}
+                onClick={() => {
+                  setToggleDate(true);
+                }}
+                {...rest}
+              />
+            )}
+          /> */}
+          
         </Box>
       </LocalizationProvider>
       {/* <ErrorMessage name={name} component={TextError} /> */}

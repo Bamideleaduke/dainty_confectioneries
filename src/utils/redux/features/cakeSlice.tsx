@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { type } from "@testing-library/user-event/dist/type";
 
 export interface CakeItem {
   id: string;
@@ -15,11 +16,23 @@ export interface CakeItem {
 }
 interface SelectedCakeProps {
   isLoading: boolean;
-  selectedCake: CakeItem[];
+  selectedCake: CakeItem;
 }
 const initialState: SelectedCakeProps = {
   isLoading: true,
-  selectedCake: [],
+  selectedCake: {
+    id: "",
+    type: "",
+    price: 0,
+    image: "",
+    description: {
+      "Cake flavours": "",
+      "Cake size": "",
+      "Icing type": "",
+      Colour: "",
+      "Preparation and delivery": "",
+    },
+  },
 };
 const selectedCakeSlice = createSlice({
   name: "cakeData",
@@ -27,7 +40,16 @@ const selectedCakeSlice = createSlice({
   reducers: {
     selectCake: (state, action) => {
       state.selectedCake = action.payload;
-    //   return action.payload;
+      localStorage.setItem("selectedCake", JSON.stringify(action.payload));
+
+      // const localStorageData = localStorage.getItem("selectedCake");
+
+      // if (localStorageData) {
+      //   state.selectedCake = JSON.parse(localStorageData);
+      // } else {
+      //   state.selectedCake = action.payload;
+      //   localStorage.setItem("selectedCake", JSON.stringify(action.payload));
+      // }
     },
   },
 });
