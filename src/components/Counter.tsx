@@ -1,11 +1,14 @@
 import { Button } from "./shared/buttons/Buttons";
 import { Box, Typography } from "@mui/material";
 
-const Counter = (count: number) => {
+
+const Counter = () => {
+ 
+
   return (
     <Box>
       <Button>-</Button>
-      <Typography>{count}</Typography>
+      <Typography>{amount}</Typography>
       <Button>+</Button>
     </Box>
   );

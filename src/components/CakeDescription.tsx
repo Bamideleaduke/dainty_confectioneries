@@ -27,11 +27,15 @@ const CakeDescription: React.FC<DataProps> = ({
                       display: "flex",
                       flexDirection: "column",
                       boxShadow: "2px 1px 9px 0px rgba(0,0,0,0.75)",
-                      width: "300px",
+                      // width: "300px",
                     }}
                   >
                     <Box component="img" src={item.image} alt={item.type} />
-                    <Box sx={{ margin: { xs: "1rem 0 1rem 1rem" } }}>
+                    <Box
+                      sx={{
+                        margin: { xs: "1rem 0 1rem 1rem", md: "0 2rem" },
+                      }}
+                    >
                       <Typography>{item.type}</Typography>
                       <Typography sx={{ fontWeight: "Bold" }}>
                         Price: {currencyConverter(item.price)}
