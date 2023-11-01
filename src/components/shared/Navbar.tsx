@@ -21,7 +21,7 @@ import { DaintyLogo, SearchIcon } from "../../assets/icons/Icons";
 import { Button } from "./buttons/Buttons";
 import { Colors } from "../../constants/colors";
 import { RouteList } from "../../constants/routes";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 interface ScrollProps {
@@ -162,7 +162,7 @@ export default function Navbar(props: Props) {
       </Box>
     </Box>
   );
-
+  const navigate = useNavigate();
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -299,6 +299,9 @@ export default function Navbar(props: Props) {
                   variant="outlined"
                   size="small"
                   sx={{ fontSize: "0.9rem" }}
+                  onClick={() => {
+                    navigate("/login");
+                  }}
                 >
                   Login
                 </Button>
@@ -309,6 +312,9 @@ export default function Navbar(props: Props) {
                       sm: "1rem",
                       md: "1rem",
                     },
+                  }}
+                  onClick={() => {
+                    navigate("/sign-up");
                   }}
                 >
                   Signup

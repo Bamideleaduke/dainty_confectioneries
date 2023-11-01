@@ -5,4 +5,6 @@ export const RouteList = {
   PRODUCT_DESCRIPTION: "/product-description/:id",
   CART:"/cart",
   CHECKOUT:"/checkout",
+  LOGIN:"/login",
+  SIGNUP:"/sign-up",
 } as const;

@@ -1,9 +1,16 @@
 import {
   Box,
-  Checkbox,
+  // Checkbox,
   FormControlLabel,
   FormGroup,
   Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Typography,
 } from "@mui/material";
 import PageHeader from "../components/PageHeader";
@@ -14,17 +21,32 @@ import * as FormMeta from "../utils/validators/CartValidator";
 import CheckboxControl from "../components/shared/forms/controls/CheckboxControl";
 import { FormControlBase } from "../components/shared/forms/FormControl";
 import FormControlWrapper from "../components/shared/forms/FormControlWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputControl from "../components/shared/forms/controls/InputControl";
-import { useAppSelector } from "../utils/hooks/redux-hook";
+import { useAppDispatch, useAppSelector } from "../utils/hooks/redux-hook";
 import { currencyConverter } from "../utils/helper/Function";
+// import DateInput from "../components/shared/forms/DatePicker";
+// import DatePicker from "../components/shared/forms/DatePicker";
+import Counter from "../components/Counter";
+import selectedCakeSlice, {
+  calculateTotal,
+} from "../utils/redux/features/cakeSlice";
+import DatePickerValue from "../components/shared/forms/DatePicker";
 import DateInput from "../components/shared/forms/DatePicker";
-import DatePicker from "../components/shared/forms/DatePicker";
+import UsageSample from "../components/shared/forms/UsageSamples";
+import Checkbox from "../components/shared/forms/Checkbox";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Checked } from "../assets/icons/iconComponents/Checked";
+import CartContainer from "../components/cart/CartContainer";
 
 const CartPage = () => {
   const { InputFieldNames } = FormMeta;
-  // const selectedCake = useAppSelector((state) => state?.cakeData?.selectedCake);
   const selectedCakeData = localStorage.getItem("selectedCake");
+  const cake = useAppSelector((state) => state.cakeData);
+  const dispatch = useAppDispatch();
+
   let selectedCake: any;
 
   if (selectedCakeData) {
@@ -35,158 +57,192 @@ const CartPage = () => {
 
   const [selectedGender, setSelectedGender] = useState("");
 
-  const handleGenderChange = (event: any) => {
-    setSelectedGender(event.target.value);
+  const handleGenderChange = (e: any) => {
+    setSelectedGender(e.target.value);
+    console.log(e.target.value);
   };
   const onSubmit = (values: any, { resetForm }: FormikHelpers<any>) => {
     resetForm();
+    values[InputFieldNames.DELIVERY_OR_PICKUP] = selectedGender;
+    values[InputFieldNames.TOTAL] = cake.amount * selectedCake.price;
+    const val = {
+      ...values,
+    };
+    // return val;
+    console.log("value", val);
   };
-  return (
-    <Formik
-      enableReinitialize={true}
-      initialValues={FormMeta.cartInitialValue}
-      validationSchema={FormMeta.cartValidationSchema}
-      onSubmit={onSubmit}
-    >
-      {(formik) => {
-        // console.log(formik.values);
-        return (
-          <Form>
-            <Box
-              sx={{
-                paddingTop: "6rem",
-                width: { xs: "90%", md: "85%" },
-                marginInline: "auto",
-              }}
-            >
-              <PageHeader text="Cart" />
 
-              <Grid container>
-                <Grid item>Quantity</Grid>
-                <Grid item>Delivery Fee</Grid>
-                <Grid item>Unit Price</Grid>
-                <Grid item>Total</Grid>
-              </Grid>
-              <Box
-                sx={{ padding: { xs: "2rem", md: "initial" }, width: "200px" }}
-              >
+  useEffect(() => {
+    dispatch(calculateTotal(selectedCake.price));
+  }, [dispatch, selectedCake.price]);
+  let delivery = 2000;
+  return (
+    <Box
+      sx={{
+        paddingTop: "6rem",
+      }}
+    >
+      <PageHeader text="Cart" />
+      <Box
+        sx={{
+          margin: "3rem 0",
+          width: { xs: "90%", md: "85%", lg: "80%" },
+          marginInline: "auto",
+        }}
+      >
+        <CartContainer
+          selectedCake={selectedCake}
+          amount={cake.amount}
+          deliveryFee={delivery}
+        />
+
+        <Formik
+          enableReinitialize={true}
+          initialValues={FormMeta.cartInitialValue}
+          validationSchema={FormMeta.cartValidationSchema}
+          onSubmit={onSubmit}
+        >
+          {(formik) => {
+            console.log("formik", formik.values);
+            return (
+              <Form>
                 <Box
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "2px 1px 9px 0px rgba(0,0,0,0.75)",
+                    marginTop: "3rem",
                   }}
                 >
                   <Box
-                    component="img"
-                    src={selectedCake?.image}
-                    alt={selectedCake?.type}
-                  />
-                  <Box sx={{ margin: { xs: "1rem 0 1rem 1rem" } }}>
-                    <Typography>{selectedCake.type}</Typography>
-                    <Typography sx={{ fontWeight: "Bold" }}>
-                      Price: {currencyConverter(selectedCake.price)}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-
-              <Box sx={{ width: { md: "40%" } }}>
-                <Box>
-                  {/* <CheckboxControl
-                    name={InputFieldNames.DELIVERY_OR_PICKUP}
-                    label={""}
-                    options={["Deliver", "Pickup"]}
-                    maxLength={2}
-                  /> */}
-                  <FormGroup>
-                    <Box sx={{ display: "flex" }}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedGender === "delivery"}
-                            onChange={handleGenderChange}
-                            value="delivery"
-                            color="primary"
-                          />
+                    sx={{
+                      width: { md: "40%" },
+                    }}
+                  >
+                    <Box>
+                      <CheckboxControl
+                        name={InputFieldNames.DELIVERY_OR_PICKUP}
+                        label={""}
+                        options={["Deliver", "Pickup"]}
+                        maxLength={1}
+                        oneOption
+                        flex
+                        initialValue={
+                          formik.values[InputFieldNames.DELIVERY_OR_PICKUP] ||
+                          null
                         }
-                        label="Deliver"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedGender === "pickup"}
-                            onChange={handleGenderChange}
-                            value="pickup"
-                            color="primary"
-                          />
-                        }
-                        label="Pickup"
                       />
                     </Box>
-                  </FormGroup>
-                </Box>
-                <InputControl
-                  name={InputFieldNames.DATE_NEEDED}
-                  label={"Date Needed"}
-                />
-                <DatePicker
-                  label={"Date"}
-                  name={InputFieldNames.DATE_NEEDED}
-                  error={undefined}
-                  id={InputFieldNames.DATE_NEEDED}
-                  inputFormat={"MM-DD-YYYY"}
-                />
-                <Box sx={{ marginBottom: "1rem" }}>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography variant="h6">Delivery Address </Typography>
-                    <Typography
-                      variant="h6"
-                      color={Colors.Primary}
-                      sx={{ cursor: "pointer" }}
-                    >
-                      Change
-                    </Typography>
-                  </Box>
-                  <Typography>
-                    House 3, Anifalaje Close, Akobo Esatate, Ibadan
-                  </Typography>
-                </Box>
-                <Box>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography variant="h6">Contact Information </Typography>
-                    <Typography
-                      variant="h6"
-                      color={Colors.Primary}
-                      sx={{ cursor: "pointer" }}
-                    >
-                      Change
-                    </Typography>
-                  </Box>
-                  <Typography>halimatalesh8@gmail.com</Typography>
-                  <Typography>08146058001</Typography>
-                </Box>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "2.5rem",
-                  }}
-                >
-                  <Button variant="outlined">Continue shopping</Button>
-                  <Button>Checkout</Button>
+                    <DateInput
+                      id={InputFieldNames.DATE_NEEDED}
+                      label={"Date & Time Needed:"}
+                      name={InputFieldNames.DATE_NEEDED}
+                      // error={undefined}
+                      value={formik.values[InputFieldNames.DATE_NEEDED]}
+                      onChange={() => {
+                        const dateValue =
+                          formik.values[InputFieldNames.DATE_NEEDED];
+                        const formattedDate =
+                          dayjs(dateValue).format("YYYY-MM-DD HH:mm");
+                        formik.setFieldValue(
+                          InputFieldNames.DATE_NEEDED,
+                          formattedDate
+                        );
+                      }}
+                    />
+
+                    <Box sx={{ marginBottom: "1rem" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography variant="h6">Delivery Address </Typography>
+                        <Typography
+                          variant="h6"
+                          color={Colors.Primary}
+                          sx={{ cursor: "pointer" }}
+                        >
+                          Change
+                        </Typography>
+                      </Box>
+                      {/* <Typography>
+                      House 3, Anifalaje Close, Akobo Esatate, Ibadan
+                      {formik.values[InputFieldNames.DELIVERY_ADDRESS]}
+                    </Typography> */}
+                      <InputControl
+                        name={InputFieldNames.DELIVERY_ADDRESS}
+                        label={""}
+                        placeholder="House 3, Anifalaje Close, Akobo Esatate, Ibadan"
+                      />
+                    </Box>
+                    <Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography variant="h6">
+                          Contact Information{" "}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          color={Colors.Primary}
+                          sx={{ cursor: "pointer" }}
+                        >
+                          Change
+                        </Typography>
+                      </Box>
+                      <InputControl
+                        name={InputFieldNames.EMAIL}
+                        label={""}
+                        placeholder="Enter your email address"
+                        variant="standard"
+                      />
+                      <InputControl
+                        name={InputFieldNames.PHONE_NUMBER}
+                        label={""}
+                        placeholder="Enter your phone number"
+                        variant="standard"
+                      />
+
+                      {/* <Typography>halimatalesh8@gmail.com</Typography>
+                    <Typography>08146058001</Typography> */}
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: "2.5rem",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        minWidth: { xs: "30px", md: "64px" },
+                        padding: { xs: "7px", md: "8px 40px" },
+                      }}
+                    >
+                      Continue shopping
+                    </Button>
+                    <Button
+                      type="submit"
+                      // sx={{
+                      //   minWidth: "30px",
+                      //   padding: { xs: "10px", md: "initial" },
+                      // }}
+                    >
+                      Checkout
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-            </Box>
-          </Form>
-        );
-      }}
-    </Formik>
+              </Form>
+            );
+          }}
+        </Formik>
+      </Box>
+    </Box>
   );
 };
 

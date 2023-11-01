@@ -8,7 +8,7 @@ const CakeDescription: React.FC<DataProps> = ({
   id,
   selected,
 }: DataProps) => {
-  console.log("cake Description", selected);
+  // console.log("cake Description", selected);
   return (
     <Box sx={{ margin: "4rem 0" }}>
       {Object.values(data[0].items).map((item) => {

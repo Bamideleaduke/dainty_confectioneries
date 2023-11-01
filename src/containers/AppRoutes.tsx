@@ -9,6 +9,9 @@ import AllProducts from "../pages/AllProducts";
 import ProductDescription from "../pages/ProductDescription";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import LoginForm from "../components/auth/LoginForm";
+import SignupForm from "../components/auth/SignupForm";
+// import SignupForm from "../components/auth/SignupForm";
 
 function DvaultRoutes() {
   return (
@@ -34,6 +37,8 @@ function DvaultRoutes() {
           element={<ProductDescription />}
         />
         <Route path="*" element={<Error />} />
+        <Route path={RouteList.LOGIN} element={<LoginForm/>} />
+        <Route path={RouteList.SIGNUP} element={<SignupForm/>} />
       </Router>
       <Footer />
     </>

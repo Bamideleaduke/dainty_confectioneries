@@ -1,4 +1,4 @@
-import { Colors } from '../../constants/colors';
+import { Colors } from "../../constants/colors";
 
 export const InputTheme = {
   styleOverrides: {
@@ -8,32 +8,33 @@ export const InputTheme = {
 export const InputBaseTheme = {
   styleOverrides: {
     root: {
-      '&.MuiOutlinedInput-root': {
-        '& input': { padding: '10px 15px' },
-        padding: '0px',
+      "&.MuiOutlinedInput-root": {
+        "& input": { padding: "10px 15px" },
+        // padding: '0px', /// commented out because of date picker
+
         // borderRadius: '15px',
         borderColor: Colors.Grundge,
-        '& fieldset': {
-          padding: '0px',
+        "& fieldset": {
+          padding: "0px",
           borderColor: Colors.Grundge,
         },
-        '&:hover fieldset': {
+        "&:hover fieldset": {
           borderColor: Colors.Grundge,
-          boxShadow: 'unset',
+          // boxShadow: 'unset',
         },
-        '&.Mui-focused fieldset': {
+        "&.Mui-focused fieldset": {
           borderColor: Colors.Grundge,
-          boxShadow: 'unset',
+          // boxShadow: 'unset',
         },
-        '& fieldset:after ': {
-          borderColor: 'red',
+        "& fieldset:after ": {
+          borderColor: "red",
         },
-        '& ::placeholder': { color: Colors.TextGray },
-        '&:hover:not(.Mui-disabled):before': {
+        "& ::placeholder": { color: Colors.Black },
+        "&:hover:not(.Mui-disabled):before": {
           borderColor: Colors.Grundge,
         },
 
-        '&.Mui-error:after': {
+        "&.Mui-error:after": {
           borderColor: Colors.Danger,
         },
       },

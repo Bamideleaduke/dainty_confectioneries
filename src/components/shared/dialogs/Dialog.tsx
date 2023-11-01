@@ -22,6 +22,7 @@ const Dialog: React.FC<DialogProps> = ({
    minWidth,
    minHeight,
 }) => {
+   
    return (
       <div>
          <MuiDialog

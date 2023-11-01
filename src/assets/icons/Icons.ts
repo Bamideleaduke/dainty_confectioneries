@@ -19,8 +19,14 @@ import InstagramLogo from "./iconComponents/InstagramLogo";
 import LocationIcon from "./iconComponents/LocationIcon";
 import MailIcon from "./iconComponents/MailIcon";
 import FilledTelephoneIcon from "./iconComponents/FilledTelephoneIcon";
-import { CupCakes } from './iconComponents/CupCakes';
-import Eclipse from './iconComponents/Eclipse';
+import { CupCakes } from "./iconComponents/CupCakes";
+import Eclipse from "./iconComponents/Eclipse";
+import { IncreaseIcon } from "./iconComponents/IncreaseIcon";
+import { DecreaseIcon } from "./iconComponents/DecreaseIcon";
+import Username from "./iconComponents/Username";
+import LockIcon from "./iconComponents/LockIcon";
+import GoogleIcon from './iconComponents/GoogleIcon';
+import CongratulationIcon from './iconComponents/CongratulationIcon';
 
 export {
   DaintyLogo,
@@ -45,5 +51,11 @@ export {
   MailIcon,
   FilledTelephoneIcon,
   CupCakes,
-  Eclipse
+  Eclipse,
+  IncreaseIcon,
+  DecreaseIcon,
+  Username,
+  LockIcon,
+  GoogleIcon,
+  CongratulationIcon
 };

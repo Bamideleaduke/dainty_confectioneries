@@ -18,14 +18,15 @@ interface SelectedCakeProps {
   isLoading: boolean;
   amount: number;
   price: number;
+  total: number;
   selectedCake: CakeItem;
   order: [];
-
 }
 const initialState: SelectedCakeProps = {
   isLoading: true,
-  amount: 0,
+  amount: 1,
   price: 0,
+  total: 0,
   selectedCake: {
     id: "",
     type: "",
@@ -39,7 +40,7 @@ const initialState: SelectedCakeProps = {
       "Preparation and delivery": "",
     },
   },
-  order:[]
+  order: [],
 };
 const selectedCakeSlice = createSlice({
   name: "cakeData",
@@ -47,31 +48,29 @@ const selectedCakeSlice = createSlice({
   reducers: {
     selectCake: (state, action) => {
       state.selectedCake = action.payload;
-      localStorage.setItem("selectedCake", JSON.stringify(action.payload))
+      localStorage.setItem("selectedCake", JSON.stringify(action.payload));
     },
-    // increase: (store, {payload}:PayloadAction<{id:string}>) => {
-      // const cartItems = store.cartItems.find((item) => item.id === payload.id);
-      // if (cartItems) cartItems.amount = cartItems.amount + 1;
-    // },
-    // decrease: (store, action: PayloadAction<{ id: string }>) => {
-      // const cartItems = store.cartItems.find(
-      //   (item) => item.id === action.payload.id
-      // );
-      // if (cartItems) cartItems.amount = cartItems.amount - 1;
-    // },
-    // calculateTotal: (store) => {
-    //   let amount = 0;
-    //   let total = 0;
-      // store.cartItems.forEach((item) => {
-      //   amount += item.amount;
-      //   // total += item.total * item.price;
-      //   total += item.price * item.amount;
-      // });
-      // store.amount = amount;
-      // store.total = total;
-    // },
+    increase: (store, action) => {
+      const cartItems = store.selectedCake.id === action.payload.id;
+      if (cartItems) store.amount += 1;
+    },
+    decrease: (store, action) => {
+      const cartItems = store.selectedCake.id === action.payload.id;
+
+      if (cartItems) store.amount = store.amount - 1;
+    },
+    calculateTotal: (store, action) => {
+      const cartItems = store.selectedCake;
+      // console.log(cartItems);
+      // console.log("cartItem", action.payload);
+      // console.log("total", store.total);
+      // console.log("amount", store.amount);
+      // if (cartItems)
+        store.total = action.payload * store.amount;
+    },
   },
 });
 
-export const { selectCake } = selectedCakeSlice.actions;
+export const { selectCake, increase, decrease, calculateTotal } =
+  selectedCakeSlice.actions;
 export default selectedCakeSlice.reducer;

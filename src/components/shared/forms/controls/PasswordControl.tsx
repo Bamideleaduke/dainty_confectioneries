@@ -2,16 +2,21 @@ import { useState } from "react";
 import { InputAdornment } from "@mui/material";
 import { FormControlBase } from "../FormControl";
 import FormControlWrapper from "../FormControlWrapper";
-import { VisibilityOn, VisiblityOff } from "../../../../assets/icons/Icons";
+import {
+  LockIcon,
+  VisibilityOn,
+  VisiblityOff,
+} from "../../../../assets/icons/Icons";
 
 interface PasswordControlProps {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   extraRight?: string;
   helperText?: React.ReactNode;
   maxLength: number;
   number?: boolean;
+  backgroundColor?: boolean;
 }
 export const PasswordControl: React.FC<PasswordControlProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +36,13 @@ export const PasswordControl: React.FC<PasswordControlProps> = (props) => {
         number={props.number}
         type={showPassword ? "text" : "password"}
         maxLength={props.maxLength}
+        backgroundColor={props.backgroundColor}
         InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockIcon />
+            </InputAdornment>
+          ),
           endAdornment: (
             <InputAdornment
               position="end"

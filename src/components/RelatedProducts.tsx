@@ -10,7 +10,7 @@ const RelatedProducts = ({ data, id }: DataProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const selectedCake = useAppSelector((state) => state.cakeData.selectedCake);
-  console.log("selected cake", selectedCake);
+  // console.log("selected cake", selectedCake);
   
   const handleItemClick = (itemId: string) => {
     const selectedCakeItem = data

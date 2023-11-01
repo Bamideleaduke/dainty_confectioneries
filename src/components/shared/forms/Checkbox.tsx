@@ -16,7 +16,7 @@ export interface CheckboxProps extends Omit<MuiCheckboxProps, "classes"> {
 const Checkbox: React.FC<CheckboxProps> = ({ label, ...restProps }) => {
   return (
     <label style={{ display: "flex", alignItems: "center" }}>
-      <StyledCheckbox {...restProps} checkedIcon={<Checked />} />
+      <StyledCheckbox  {...restProps} checkedIcon={<Checked  />} />
       {label}
     </label>
   );

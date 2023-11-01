@@ -4,6 +4,7 @@ import { InputErrorText } from "../forms/InputFieldError";
 import {
   Box,
   FormControl,
+  InputAdornment,
   TextField,
   TextFieldProps,
   Typography,
@@ -17,6 +18,7 @@ import { Colors } from "../../../constants/colors";
 export type InputProps = TextFieldProps & {
   name: string;
   children?: ReactNode;
+  startAdornment?: ReactNode;
   currency?: boolean;
   percentage?: boolean;
   ratio?: boolean;
@@ -25,7 +27,9 @@ export type InputProps = TextFieldProps & {
   extraLeft?: ReactNode;
   extraRight?: ReactNode;
   showErrorMessage?: boolean;
+  backgroundColor?: boolean;
   maxLength: number;
+  variant?: "outlined" | "standard" | "filled";
 };
 export const numberRegex = /(?:\b0(?:\.0*|$))|[^\d]/g;
 export const AlphabetRegex = /[^a-zA-Z\s]+/g;
@@ -38,8 +42,11 @@ export const Input: React.FC<InputProps> = ({
   ratio,
   number,
   alphabet,
+  backgroundColor,
   showErrorMessage = true,
   maxLength,
+  variant,
+  startAdornment,
   ...props
 }) => {
   const handleChange = (
@@ -82,13 +89,22 @@ export const Input: React.FC<InputProps> = ({
               {extraLeft && <Typography mr={1}>{extraLeft}</Typography>}
               <FormControl fullWidth>
                 <TextField
+                  variant={variant ?? "outlined"}
                   sx={{
+                    color: Colors.Black,
+                    backgroundColor: backgroundColor ? "#D4D4E9" : "initial",
+                    borderRadius: "10px",
                     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: field.value ? Colors.Black : "inherit",
-                        boxShadow: field.value
-                          ? "0px 0px 4px 2px #EC7E8140"
+                        // borderColor: field.value ? Colors.Black : "inherit",
+                        border: "none",
+                        boxShadow: !backgroundColor
+                          ? `0px 0px 4px 2px ${Colors.TextGray}`
                           : "inherit",
+                        // backgroundColor: backgroundColor
+                        //   ? "#D4D4E9"
+                        //   : "initial",
+                        // color: backgroundColor ? Colors.Black : "red",
                       },
                     // "& .MuiInputBase-input-MuiOutlinedInput-input": {
                     //   color: "red",
@@ -108,6 +124,11 @@ export const Input: React.FC<InputProps> = ({
                     autoComplete: "off",
                     maxLength: maxLength,
                     ...props.inputProps,
+                    // startAdornment: (
+                    //   <InputAdornment position="start">
+                    //     {startAdornment}
+                    //   </InputAdornment>
+                    // ),
                   }}
                 />
               </FormControl>

@@ -1,25 +1,35 @@
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon, SvgIconProps } from "@mui/material";
 
 export const Checked = (props: SvgIconProps) => {
   return (
     <SvgIcon {...props}>
       <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
+        width="24"
+        height="25"
+        viewBox="0 0 24 25"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x="1"
-          y="1"
-          width="16"
-          height="16"
-          rx="4"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <rect x="4" y="4" width="10" height="10" rx="2" fill="currentColor" />
+        <g clipPath="url(#clip0_498_1044)">
+          <path
+            d="M4 3.5H20C20.2652 3.5 20.5196 3.60536 20.7071 3.79289C20.8946 3.98043 21 4.23478 21 4.5V20.5C21 20.7652 20.8946 21.0196 20.7071 21.2071C20.5196 21.3946 20.2652 21.5 20 21.5H4C3.73478 21.5 3.48043 21.3946 3.29289 21.2071C3.10536 21.0196 3 20.7652 3 20.5V4.5C3 4.23478 3.10536 3.98043 3.29289 3.79289C3.48043 3.60536 3.73478 3.5 4 3.5ZM5 5.5V19.5H19V5.5H5Z"
+            fill="#000080"
+          />
+          <path
+            d="M9.33333 19.1667L2.66667 12.5L4.54667 10.6067L9.33333 15.3933L19.4533 5.27333L21.3333 7.16667M21.3333 0.5H2.66667C1.18667 0.5 0 1.68667 0 3.16667V21.8333C0 22.5406 0.280951 23.2189 0.781048 23.719C1.28115 24.219 1.95942 24.5 2.66667 24.5H21.3333C22.0406 24.5 22.7189 24.219 23.219 23.719C23.719 23.2189 24 22.5406 24 21.8333V3.16667C24 2.45942 23.719 1.78115 23.219 1.28105C22.7189 0.780951 22.0406 0.5 21.3333 0.5Z"
+            fill="#000080"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_498_1044">
+            <rect
+              width="24"
+              height="24"
+              fill="white"
+              transform="translate(0 0.5)"
+            />
+          </clipPath>
+        </defs>
       </svg>
     </SvgIcon>
   );

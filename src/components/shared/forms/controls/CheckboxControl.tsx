@@ -6,7 +6,10 @@ interface CheckboxProps {
   label: string;
   placeholder?: string;
   options: string[];
+  oneOption?: boolean;
   maxLength: number;
+  initialValue?: string | null;
+  flex?: boolean;
 }
 const CheckboxControl: React.FC<CheckboxProps> = (props) => {
   return (
@@ -17,6 +20,9 @@ const CheckboxControl: React.FC<CheckboxProps> = (props) => {
         placeholder={props.placeholder}
         options={props.options}
         maxLength={props.maxLength}
+        oneOption={props.oneOption}
+        initialValue={props.initialValue}
+        flex={props.flex}
       />
     </FormControlWrapper>
   );

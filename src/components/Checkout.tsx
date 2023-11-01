@@ -44,7 +44,7 @@ const Checkout: React.FC = () => {
       onSubmit={onSubmit}
     >
       {(formik) => {
-        // console.log(formik.values);
+        console.log(formik.values);
         return (
           <Form>
             <Box>

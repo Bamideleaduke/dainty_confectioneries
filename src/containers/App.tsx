@@ -6,6 +6,9 @@ import { GlobalTheme } from "../utils/material-themes";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../utils/redux/store";
+// import { useEffect } from "react";
+// import { calculateTotal, selectCake } from "../utils/redux/features/cakeSlice";
+// import { useAppDispatch } from "../utils/hooks/redux-hook";
 function App() {
   return (
     <BrowserRouter>

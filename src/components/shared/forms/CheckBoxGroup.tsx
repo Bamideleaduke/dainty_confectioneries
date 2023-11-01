@@ -3,6 +3,7 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  Box,
 } from "@mui/material";
 import { Field, FieldProps, ErrorMessage } from "formik";
 import { InputErrorText } from "../forms/InputFieldError";
@@ -14,34 +15,59 @@ export interface CheckBoxGroupProps extends MuiFormGroupProps {
   name: string;
   options: string[];
   maxLength: number;
+  oneOption?: boolean;
+  initialValue?: string | null;
   actionComp?: React.ReactNode[];
+  flex?: boolean;
 }
 
 export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
   actionComp,
   options,
   maxLength,
+  oneOption,
+  initialValue,
+  flex,
   ...props
 }) => {
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+  // const [selectedValue, setSelectedValue] = React.useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = React.useState<string | null>(
+    oneOption ? (initialValue !== undefined ? initialValue : null) : null
+  );
 
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     form: FieldProps["form"]
   ) => {
     const { value, checked } = event.target;
-    if (checked) {
-      // setSelectedValues((prevValues) => [...prevValues, value]);
-      if (selectedValues.length < maxLength) {
-        setSelectedValues((prevValues) => [...prevValues, value]);
+
+    if (oneOption) {
+      if (checked) {
+        console.log("select", selectedValue);
+        console.log("value", value);
+        setSelectedValue(value);
+        form.setFieldValue(props.name, value);
       } else {
-        event.preventDefault();
+        setSelectedValue(null);
+        form.setFieldValue(props.name, null);
       }
     } else {
-      setSelectedValues((prevValues) => prevValues.filter((v) => v !== value));
+      const currentSelectedValues = form.values[props.name] || [];
+      if (checked) {
+        if (currentSelectedValues.length < maxLength) {
+          form.setFieldValue(props.name, [...currentSelectedValues, value]);
+        } else {
+          event.preventDefault();
+        }
+      } else {
+        form.setFieldValue(
+          props.name,
+          currentSelectedValues.filter((v: any) => v !== value)
+        );
+      }
     }
-    form.handleChange(event);
-    form.setFieldValue(props.name, selectedValues);
+
+    form.handleChange(event.target.value);
   };
 
   return (
@@ -50,32 +76,49 @@ export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
         return (
           <>
             <FormControl fullWidth>
-              <FormGroup {...props} {...field} id={props.name}>
-                {options.map((option, id) => (
-                  <React.Fragment key={option}>
-                    <FormControlLabel
-                      sx={{ mb: 1 }}
-                      value={option}
-                      control={
-                        <Checkbox
-                          id={props.name}
-                          name={props.name}
-                          sx={{ mr: 1,color:Colors.Primary }}
-                          onChange={(e) => handleCheckboxChange(e, form)}
-                          value={option}
-                          inputProps={{
-                            maxLength: maxLength,
-                          }}
-                          checked={form.values[props.name]?.includes(option)}
-                        />
-                      }
-                      label={option}
-                    />
-                    {/* {selectedValues?.includes(option) &&
-                      actionComp &&
-                      actionComp[id]} */}
-                  </React.Fragment>
-                ))}
+              <FormGroup
+                {...props}
+                {...field}
+                id={props.name}
+                sx={{
+                  display: flex ? "flex" : "initial",
+                  flexDirection: "row",
+                }}
+              >
+                {options.map((option) => {
+                  return (
+                    <Box key={option}>
+                      <FormControlLabel
+                        sx={{ mb: 1 }}
+                        value={option}
+                        control={
+                          <Checkbox
+                            id={props.name}
+                            name={props.name}
+                            sx={{ mr: 1, color: Colors.Primary }}
+                            onChange={(e) => {
+                              // console.log("e", e);
+                              // console.log("e.target", e.target.value);
+                              const val = e.target.value;
+                              handleCheckboxChange(e, form);
+                            }}
+                            value={option}
+                            inputProps={{
+                              maxLength: maxLength,
+                            }}
+                            checked={
+                              oneOption
+                                ? selectedValue === option
+                                : form.values[props.name]?.includes(option) ||
+                                  false
+                            }
+                          />
+                        }
+                        label={option}
+                      />
+                    </Box>
+                  );
+                })}
               </FormGroup>
 
               <ErrorMessage
