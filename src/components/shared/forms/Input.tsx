@@ -30,6 +30,8 @@ export type InputProps = TextFieldProps & {
   backgroundColor?: boolean;
   maxLength: number;
   variant?: "outlined" | "standard" | "filled";
+  multiline?: boolean;
+  rows?: number;
 };
 export const numberRegex = /(?:\b0(?:\.0*|$))|[^\d]/g;
 export const AlphabetRegex = /[^a-zA-Z\s]+/g;
@@ -46,7 +48,9 @@ export const Input: React.FC<InputProps> = ({
   showErrorMessage = true,
   maxLength,
   variant,
+  multiline,
   startAdornment,
+  rows,
   ...props
 }) => {
   const handleChange = (
@@ -90,6 +94,9 @@ export const Input: React.FC<InputProps> = ({
               <FormControl fullWidth>
                 <TextField
                   variant={variant ?? "outlined"}
+                  multiline={multiline ?? multiline}
+                  // maxRows={5}
+                  rows={rows ?? rows}
                   sx={{
                     color: Colors.Black,
                     backgroundColor: backgroundColor ? "#D4D4E9" : "initial",
@@ -99,7 +106,7 @@ export const Input: React.FC<InputProps> = ({
                         // borderColor: field.value ? Colors.Black : "inherit",
                         border: "none",
                         boxShadow: !backgroundColor
-                          ? `0px 0px 4px 2px ${Colors.TextGray}`
+                          ? `0px 0px 2px 1px ${Colors.TextGray}`
                           : "inherit",
                         // backgroundColor: backgroundColor
                         //   ? "#D4D4E9"

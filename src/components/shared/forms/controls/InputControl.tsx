@@ -15,6 +15,8 @@ interface InputControlProps {
   alphabet?: boolean;
   backgroundColor?: boolean;
   variant?: "outlined" | "standard" | "filled";
+  multiline?: boolean;
+  rows?: number;
 }
 
 const InputControl: React.FC<InputControlProps> = (props) => {
@@ -30,12 +32,16 @@ const InputControl: React.FC<InputControlProps> = (props) => {
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         backgroundColor={props.backgroundColor}
+        multiline={props.multiline}
+        rows={props.rows}
         // startAdornment={props.startAdornment}
         InputProps={{
-          startAdornment: (
+          startAdornment: props.startAdornment ? (
             <InputAdornment position="start">
               {props.startAdornment}
             </InputAdornment>
+          ) : (
+            ""
           ),
         }}
         // {...(props.control === "input" ? { maxLength: props.maxLength } : {})}

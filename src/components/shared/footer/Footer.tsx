@@ -17,12 +17,12 @@ const Footer = () => {
     <Box
       sx={{
         backgroundColor: Colors.Primary,
-        padding: "2rem",
+        padding: { xs: "2rem 1rem 2em 0 ", md: "2rem" },
         color: Colors.White,
       }}
     >
       <Box sx={{ width: { xs: "95%", md: "85%" }, marginInline: "auto" }}>
-        <Grid container>
+        <Grid container >
           <Grid item xs={12} sm={4} md={3}>
             <Box
               component="img"
@@ -112,8 +112,11 @@ const Footer = () => {
         >
           <CopyrightIcon
             sx={{
-              fontSize: "0.9rem",
-              marginRight: { xs: "0.2rem", md: "0.4rem" },
+              fontSize: { xs: "0.5rem", md: "0.9rem" },
+              marginRight: {
+                // xs: "0.2rem",
+                md: "0.4rem",
+              },
             }}
           />
           Copyright All reserved. Dainty confectioneries

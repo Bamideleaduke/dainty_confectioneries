@@ -9,6 +9,7 @@ export const Colors = {
   TextGray: "#A4A2A5",
   Grundge: "#4E4755",
   BackgroundGray: "#D9D9D9",
+  Star:"#F8BD00"
 } as const;
 
 export const ColorMaps = {};

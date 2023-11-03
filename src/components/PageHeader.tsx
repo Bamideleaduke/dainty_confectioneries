@@ -1,22 +1,23 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Colors } from "../constants/colors";
 
 interface PageHeaderProps {
-    text: string;
-  }
-  
-  const PageHeader: React.FC<PageHeaderProps> = ({ text }) => {
+  text: string;
+  subText?: string;
+}
+
+const PageHeader: React.FC<PageHeaderProps> = ({ text, subText }) => {
   return (
-    <Typography
-      variant="h5"
+    <Box
       sx={{
         backgroundColor: Colors.Secondary,
         padding: "1rem 0",
         textAlign: "center",
       }}
     >
-      {text}
-    </Typography>
+      <Typography variant="h5">{text}</Typography>
+      <Typography>{subText}</Typography>
+    </Box>
   );
 };
 

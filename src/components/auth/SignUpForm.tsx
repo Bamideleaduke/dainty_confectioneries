@@ -30,12 +30,12 @@ const SignUpForm: React.FC = () => {
   return (
     <Box
       sx={{
-        width: "400px",
+        width: { md: "400px" },
         marginInline: "auto",
         padding: "1rem",
-        margin: "6rem auto 2rem",
+        margin: { md: "6rem auto 2rem" },
         textAlign: "center",
-        boxShadow: "2px 1px 9px 0px rgba(0,0,0,0.75)",
+        boxShadow: { md: "2px 1px 9px 0px rgba(0,0,0,0.75)" },
       }}
     >
       <Box sx={{ margin: "0 0 1rem" }}>
@@ -111,7 +111,11 @@ const SignUpForm: React.FC = () => {
                     variant="outlined"
                     startIcon={<GoogleIcon />}
                     fullWidth
-                    sx={{ margin: "2rem 0 1.5rem", borderRadius: "30px" }}
+                    sx={{
+                      margin: "2rem 0 1.5rem",
+                      borderRadius: "30px",
+                      fontSize: { xs: "0.7rem", md: "initial" },
+                    }}
                   >
                     Sign up with Google
                   </Button>
@@ -119,7 +123,10 @@ const SignUpForm: React.FC = () => {
                     variant="outlined"
                     startIcon={<FacebookLogo />}
                     fullWidth
-                    sx={{ borderRadius: "30px" }}
+                    sx={{
+                      borderRadius: "30px",
+                      fontSize: { xs: "0.7rem", md: "initial" },
+                    }}
                   >
                     Sign up with Facebook
                   </Button>
@@ -142,10 +149,20 @@ const SignUpForm: React.FC = () => {
       <Dialog
         open={openDialog}
         handleClose={() => setOpenDialog(false)}
+        minWidth={"30%"}
         children={
-          <Box >
+          <Box sx={{ textAlign: "center" }}>
             <Box component="img" src={Congratulation} />
-            <Typography>Account Registration Successfully</Typography>
+            <Typography variant={"h4"}>
+              Account Registration Successful
+            </Typography>
+            <Button
+              variant="text"
+              sx={{ color: Colors.Primary, fontSize: "1.2rem" }}
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
           </Box>
         }
       />

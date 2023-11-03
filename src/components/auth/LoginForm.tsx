@@ -24,12 +24,12 @@ const LoginForm: React.FC = () => {
   return (
     <Box
       sx={{
-        width: "400px",
+        width: { md: "400px" },
         // marginInline: "auto",
         padding: "1rem",
-        margin: "6rem auto 2rem",
+        margin: { md: "6rem auto 2rem" },
         textAlign: "center",
-        boxShadow: "2px 1px 9px 0px rgba(0,0,0,0.75)",
+        boxShadow: { md: "2px 1px 9px 0px rgba(0,0,0,0.75)" },
       }}
     >
       <Box sx={{ marginBottom: "1rem" }}>
@@ -87,7 +87,11 @@ const LoginForm: React.FC = () => {
                       variant="outlined"
                       startIcon={<GoogleIcon />}
                       fullWidth
-                      sx={{ margin: "2rem 0 1.5rem", borderRadius: "30px" }}
+                      sx={{
+                        margin: "2rem 0 1.5rem",
+                        borderRadius: "30px",
+                        fontSize: { xs: "0.7rem", md: "initial" },
+                      }}
                     >
                       Sign up with Google
                     </Button>
@@ -95,7 +99,10 @@ const LoginForm: React.FC = () => {
                       variant="outlined"
                       startIcon={<FacebookLogo />}
                       fullWidth
-                      sx={{ borderRadius: "30px" }}
+                      sx={{
+                        borderRadius: "30px",
+                        fontSize: { xs: "0.7rem", md: "initial" },
+                      }}
                     >
                       Sign up with Facebook
                     </Button>
