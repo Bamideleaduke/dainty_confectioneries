@@ -14,6 +14,7 @@ const CheckoutPage: React.FC = () => {
       <PageHeader text={"CHECKOUT"} />
       <Box sx={{ width: { md: "40%" }, marginInline: "auto" }}>
         <Checkout />
+        
       </Box>
     </Box>
   );

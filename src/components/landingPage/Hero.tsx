@@ -6,8 +6,10 @@ import {
   TwitterIcon,
 } from "../../assets/icons/Icons";
 import { Button } from "../shared/buttons/Buttons";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -94,6 +96,7 @@ const Hero = () => {
               // textTransform: "capitalize",
               // padding: "0.6rem 2rem",
             }}
+            onClick={() => navigate("/products")}
           >
             Order now
           </Button>

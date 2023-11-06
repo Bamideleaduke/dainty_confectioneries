@@ -1,11 +1,13 @@
 // import { createStore } from "redux";
+import AuthSlice from "./features/AuthSlice";
 import cakeSlice from "./features/cakeSlice";
 
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
   reducer: {
-   cakeData:cakeSlice
+    cakeData: cakeSlice,
+    user: AuthSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

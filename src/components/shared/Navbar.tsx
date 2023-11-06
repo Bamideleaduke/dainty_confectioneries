@@ -13,16 +13,28 @@ import {
   Toolbar,
   TextField,
   InputAdornment,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo2 from "../../assets/Dainty-logo.svg";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import { DaintyLogo, SearchIcon } from "../../assets/icons/Icons";
+import {
+  CartIcon,
+  DaintyLogo,
+  ProfileIcon,
+  SearchIcon,
+} from "../../assets/icons/Icons";
 import { Button } from "./buttons/Buttons";
 import { Colors } from "../../constants/colors";
 import { RouteList } from "../../constants/routes";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import BasicPopover from "./popover/Popover";
+import { useAppDispatch } from "../../utils/hooks/redux-hook";
+import { logOut } from "../../utils/redux/features/AuthSlice";
+import Dialog from "./dialogs/Dialog";
+import LoginForm from "../auth/LoginForm";
+import SignUpForm from "../auth/SignUpForm";
 
 interface ScrollProps {
   window?: () => Window;
@@ -50,21 +62,29 @@ const navData = [
   { id: 2, link: "About us", path: RouteList.ABOUT },
   { id: 4, link: "Contact", path: "..." },
   { id: 5, link: "Search", path: "..." },
-  { id: 6, link: "Categories", path: "..." },
+  // { id: 6, link: "Categories", path: "..." },
 ];
 
 export default function Navbar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openSignup, setOpenSignup] = React.useState(false);
   const [activePage, setActivePage] = React.useState("");
   const location = useLocation();
-
+  const user = localStorage.getItem("user");
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const currentPage = location.pathname === "/" ? "Home" : "Other";
     setActivePage(currentPage);
   }, [location]);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleReloadClick = () => {
+    (window as any).location.reload();
+    dispatch(logOut());
   };
 
   const drawer = (
@@ -285,41 +305,99 @@ export default function Navbar(props: Props) {
                 </Box>
               </Box>
 
-              <Box
-                sx={{
-                  display: { xs: "none", sm: "flex" },
-                  alignItems: "center",
-                  marginLeft: {
-                    sm: "1rem",
-                    md: "2rem",
-                  },
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ fontSize: "0.9rem" }}
-                  onClick={() => {
-                    navigate("/login");
-                  }}
-                >
-                  Login
-                </Button>
-                <Button
-                  size="small"
+              {!user ? (
+                <Box
                   sx={{
+                    display: { xs: "none", sm: "flex" },
+                    alignItems: "center",
                     marginLeft: {
                       sm: "1rem",
-                      md: "1rem",
+                      md: "2rem",
                     },
                   }}
-                  onClick={() => {
-                    navigate("/sign-up");
+                >
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    sx={{ fontSize: "0.9rem" }}
+                    onClick={() => {
+                      // navigate("/login");
+                      setOpen(true);
+                    }}
+                  >
+                    Login
+                  </Button>
+                  <Dialog
+                    open={open}
+                    minWidth={"max-content"}
+                    minHeight={"max-content"}
+                    handleClose={() => setOpen(false)}
+                    children={<LoginForm setOpen={setOpen} />}
+                  />
+                  <Button
+                    size="small"
+                    sx={{
+                      marginLeft: {
+                        sm: "1rem",
+                        md: "1rem",
+                      },
+                    }}
+                    onClick={() => {
+                      // navigate("/sign-up");
+                      setOpenSignup(true);
+                    }}
+                  >
+                    Signup
+                  </Button>
+                  <Dialog
+                    open={openSignup}
+                    minWidth={"max-content"}
+                    minHeight={"100%"}
+                    handleClose={() => setOpenSignup(false)}
+                    children={<SignUpForm setOpenSignup={setOpenSignup} />}
+                  />
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    display: { xs: "none", sm: "flex" },
+                    alignItems: "center",
+                    marginLeft: {
+                      sm: "1rem",
+                      md: "2rem",
+                    },
                   }}
                 >
-                  Signup
-                </Button>
-              </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "start",
+                      justifyContent: "start",
+                      position: "relative",
+                      marginRight: "3rem",
+                    }}
+                  >
+                    <CartIcon />
+
+                    <Typography
+                      sx={{ position: "absolute", top: "-10px", left: "22px" }}
+                    >
+                      1
+                    </Typography>
+                  </Box>
+                  <BasicPopover
+                    content={
+                      <Typography
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleReloadClick()}
+                      >
+                        Log out
+                      </Typography>
+                    }
+                    btnContent={<ProfileIcon />}
+                  />
+                </Box>
+              )}
             </Box>
             <Box
               sx={{

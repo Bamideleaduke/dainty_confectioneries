@@ -40,6 +40,9 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Checked } from "../assets/icons/iconComponents/Checked";
 import CartContainer from "../components/cart/CartContainer";
+import PaystackButton from "react-paystack/dist/paystack-button";
+import Paystack from "../components/payment/Paystack";
+import FlutterWave from "../components/payment/Flutterwave";
 
 const CartPage = () => {
   const { InputFieldNames } = FormMeta;
@@ -226,15 +229,16 @@ const CartPage = () => {
                     >
                       Continue shopping
                     </Button>
-                    <Button
-                      type="submit"
-                      // sx={{
-                      //   minWidth: "30px",
-                      //   padding: { xs: "10px", md: "initial" },
-                      // }}
-                    >
-                      Checkout
-                    </Button>
+                    {/* <Button
+                      component={PaystackButton}
+                      {...componentProps}
+                      sx={{
+                        backgroundColor: Colors.Primary,
+                        color: Colors.White,
+                      }}
+                    /> */}
+                    {/* <Paystack /> */}
+                    <FlutterWave />
                   </Box>
                 </Box>
               </Form>

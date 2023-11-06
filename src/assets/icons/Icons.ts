@@ -27,6 +27,8 @@ import Username from "./iconComponents/Username";
 import LockIcon from "./iconComponents/LockIcon";
 import GoogleIcon from "./iconComponents/GoogleIcon";
 import CongratulationIcon from "./iconComponents/CongratulationIcon";
+import { CartIcon } from "./iconComponents/CartIcon";
+import { ProfileIcon } from "./iconComponents/ProfileIcon";
 
 export {
   DaintyLogo,
@@ -58,4 +60,6 @@ export {
   LockIcon,
   GoogleIcon,
   CongratulationIcon,
+  CartIcon,
+  ProfileIcon,
 };

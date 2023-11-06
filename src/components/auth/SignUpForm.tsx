@@ -19,23 +19,24 @@ import { useState } from "react";
 import Dialog from "../shared/dialogs/Dialog";
 import Congratulation from "../../assets/congratulation.svg";
 
-const SignUpForm: React.FC = () => {
+const SignUpForm = ({ setOpenSignup }: any) => {
   const { InputFieldNames } = FormMeta;
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
 
   const onSubmit = (values: any, { resetForm }: FormikHelpers<any>) => {
     // resetForm();
+    setOpenSignup(false);
   };
   return (
     <Box
       sx={{
         width: { md: "400px" },
-        marginInline: "auto",
-        padding: "1rem",
-        margin: { md: "6rem auto 2rem" },
+        // marginInline: "auto",
+        // padding: "1rem",
+        // margin: { md: "6rem auto 2rem" },
         textAlign: "center",
-        boxShadow: { md: "2px 1px 9px 0px rgba(0,0,0,0.75)" },
+        // boxShadow: { md: "2px 1px 9px 0px rgba(0,0,0,0.75)" },
       }}
     >
       <Box sx={{ margin: "0 0 1rem" }}>
