@@ -20,7 +20,7 @@ interface SelectedCakeProps {
   price: number;
   total: number;
   selectedCake: CakeItem;
-  order: [];
+  order:  CakeItem[];
 }
 const initialState: SelectedCakeProps = {
   isLoading: true,
@@ -50,6 +50,10 @@ const selectedCakeSlice = createSlice({
       state.selectedCake = action.payload;
       localStorage.setItem("selectedCake", JSON.stringify(action.payload));
     },
+    addToOrder: (state, action: PayloadAction<CakeItem>) => {
+      console.log("payload order",action.payload)
+      state.order.push(action.payload);
+    },
     increase: (store, action) => {
       const cartItems = store.selectedCake.id === action.payload.id;
       if (cartItems) store.amount += 1;
@@ -71,6 +75,6 @@ const selectedCakeSlice = createSlice({
   },
 });
 
-export const { selectCake, increase, decrease, calculateTotal } =
+export const { selectCake, increase, decrease, calculateTotal,addToOrder } =
   selectedCakeSlice.actions;
 export default selectedCakeSlice.reducer;

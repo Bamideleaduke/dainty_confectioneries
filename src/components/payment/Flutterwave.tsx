@@ -1,4 +1,8 @@
-import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
+import {
+  FlutterWaveButton,
+  closePaymentModal,
+  useFlutterwave,
+} from "flutterwave-react-v3";
 import { Button } from "../shared/buttons/Buttons";
 import { Colors } from "../../constants/colors";
 import { useNavigate } from "react-router";
@@ -26,7 +30,7 @@ interface Config {
 export default function FlutterWave() {
   const navigate = useNavigate();
   const config: Config = {
-    // public_key: "FLWPUBK-**************************-X",
+    
     public_key: `${process.env.F_AUTH}`,
     tx_ref: Date.now().toString(),
     amount: 100,
@@ -44,29 +48,47 @@ export default function FlutterWave() {
     },
   };
 
-  const fwConfig = {
-    ...config,
-    text: "Checkout",
-    callback: (response: any) => {
-      console.log(response);
-      if (response.status === "completed") {
-        console.log("comleted");
-        navigate("/");
-        closePaymentModal(); // this will close the modal programmatically
-      }
-    },
-    onClose: (response: any) => {
-      console.log("onclose", response);
-      navigate("/");
-    },
-  };
-
+  // const fwConfig = {
+  //   ...config,
+  //   text: "Checkout",
+  //   callback: (response: any) => {
+  //     console.log(response);
+  //     if (response?.status === "completed") {
+  //       console.log("comleted");
+  //       navigate("/");
+  //       closePaymentModal();
+  //     }
+  //   },
+  //   onClose: (response: any) => {
+  //     console.log("onclose", response);
+  //     navigate("/");
+  //   },
+  // };
+  const handleFlutterPayment = useFlutterwave(config);
+  let checkout = () =>
+    handleFlutterPayment({
+      callback: (response) => {
+        // console.log(response);
+        // closePaymentModal();
+        if (response?.status === "completed") {
+          // console.log("completed");
+          closePaymentModal();
+          navigate("/products");
+        }
+      },
+      onClose: () => {
+        navigate("/products");
+      },
+    });
   return (
     <Button
-      component={FlutterWaveButton}
-      {...fwConfig}
+      // LinkComponent={FlutterWaveButton}
+      onClick={() => checkout()}
+      // {...fwConfig}
       sx={{ backgroundColor: Colors.Primary, color: Colors.White }}
-    />
+    >
+      Checkout
+    </Button>
   );
   // <FlutterWaveButton {...fwConfig} />;
 }

@@ -2,96 +2,92 @@ import React from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
-// import { useTheme } from "@emotion/react";
 
 function Error() {
-  // const theme = useTheme();
   return (
-    <>
-      <Box>
+    <Box>
+      <Grid
+        container
+        justifyContent={"center"}
+        sx={
+          {
+            // border: '2px solid red',
+          }
+        }
+      >
         <Grid
-          container
-          justifyContent={"center"}
+          item
           sx={
             {
-              // border: '2px solid red',
+              // border: '2px solid yellow',
             }
           }
         >
-          <Grid
-            item
-            sx={
-              {
-                // border: '2px solid yellow',
-              }
-            }
+          <Box
+            sx={{
+              // border: '2px solid blue',
+              // [theme.breakpoints.down('md')]: {
+              //   width: '94%',
+              //   padding: '20px',
+              // },
+              width: "70%",
+              margin: "0 auto 70px auto",
+            }}
           >
-            <Box
+            <Typography
+              variant="h1"
+              align={"center"}
               sx={{
-                // border: '2px solid blue',
-                // [theme.breakpoints.down('md')]: {
-                //   width: '94%',
-                //   padding: '20px',
+                // [theme.breakpoints.down('xs')]: {
+                //   fontSize: '9rem',
                 // },
-                width: "70%",
-                margin: "0 auto 70px auto",
+
+                fontSize: "13rem",
               }}
             >
-              <Typography
-                variant="h1"
-                align={"center"}
+              404
+            </Typography>
+            <Typography
+              variant="h4"
+              align={"center"}
+              sx={{
+                // [theme.breakpoints.down('xs')]: {
+                //   fontSize: '2rem',
+                // },
+                paddingBottom: "20px",
+              }}
+            >
+              Sorry, the page you're looking for can't be found.
+            </Typography>
+            <Typography variant="body1" color="initial" align={"center"}>
+              It may have been moved or deleted, or you may have typed the URL
+              incorrectly. Please check the address and try again, or go back to
+              the previous page.
+            </Typography>
+            <Link to={"/"}>
+              <Button
+                variant="contained"
+                color="primary"
                 sx={{
-                  // [theme.breakpoints.down('xs')]: {
-                  //   fontSize: '9rem',
-                  // },
-
-                  fontSize: "13rem",
+                  "&.MuiButton-root": {
+                    textTransform: "Capitalize",
+                    display: "block",
+                    // [theme.breakpoints.down('sm')]: {
+                    //   width: '50%',
+                    // },
+                    width: "30%",
+                    margin: "30px auto",
+                    marginBottom: "0",
+                  },
                 }}
               >
-                404
-              </Typography>
-              <Typography
-                variant="h4"
-                align={"center"}
-                sx={{
-                  // [theme.breakpoints.down('xs')]: {
-                  //   fontSize: '2rem',
-                  // },
-                  paddingBottom: "20px",
-                }}
-              >
-                Sorry, the page you're looking for can't be found.
-              </Typography>
-              <Typography variant="body1" color="initial" align={"center"}>
-                It may have been moved or deleted, or you may have typed the URL
-                incorrectly. Please check the address and try again, or go back
-                to the previous page.
-              </Typography>
-              <Link to={"/"}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    "&.MuiButton-root": {
-                      textTransform: "Capitalize",
-                      display: "block",
-                      // [theme.breakpoints.down('sm')]: {
-                      //   width: '50%',
-                      // },
-                      width: "30%",
-                      margin: "30px auto",
-                      marginBottom: "0",
-                    },
-                  }}
-                >
-                  Go home
-                </Button>
-              </Link>
-            </Box>
-          </Grid>
+                Go home
+              </Button>
+            </Link>
+          </Box>
         </Grid>
-      </Box>
-    </>
+      </Grid>
+    </Box>
   );
 }
 

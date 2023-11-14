@@ -9,7 +9,7 @@ export const InputBaseTheme = {
   styleOverrides: {
     root: {
       "&.MuiOutlinedInput-root": {
-        "& input": { padding: "10px 15px" },
+        "& input": { padding: "10px 15px", color: Colors.Black },
         // padding: '0px', /// commented out because of date picker
 
         // borderRadius: '15px',
@@ -17,6 +17,7 @@ export const InputBaseTheme = {
         "& fieldset": {
           padding: "0px",
           borderColor: Colors.Grundge,
+          color: Colors.Black,
         },
         "&:hover fieldset": {
           borderColor: Colors.Grundge,

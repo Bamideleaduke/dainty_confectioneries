@@ -30,7 +30,7 @@ import { RouteList } from "../../constants/routes";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import BasicPopover from "./popover/Popover";
-import { useAppDispatch } from "../../utils/hooks/redux-hook";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/redux-hook";
 import { logOut } from "../../utils/redux/features/AuthSlice";
 import Dialog from "./dialogs/Dialog";
 import LoginForm from "../auth/LoginForm";
@@ -74,6 +74,8 @@ export default function Navbar(props: Props) {
   const location = useLocation();
   const user = localStorage.getItem("user");
   const dispatch = useAppDispatch();
+  const order = useAppSelector((state) => state.cakeData?.order);
+  
   useEffect(() => {
     const currentPage = location.pathname === "/" ? "Home" : "Other";
     setActivePage(currentPage);
@@ -83,7 +85,7 @@ export default function Navbar(props: Props) {
   };
 
   const handleReloadClick = () => {
-    (window as any).location.reload();
+    // (window as any).location.reload(false);
     dispatch(logOut());
   };
 
@@ -354,8 +356,9 @@ export default function Navbar(props: Props) {
                     minWidth={"max-content"}
                     minHeight={"100%"}
                     handleClose={() => setOpenSignup(false)}
-                    children={<SignUpForm setOpenSignup={setOpenSignup} />}
-                  />
+                  >
+                    <SignUpForm setOpenSignup={setOpenSignup} />
+                  </Dialog>
                 </Box>
               ) : (
                 <Box
@@ -380,9 +383,9 @@ export default function Navbar(props: Props) {
                     <CartIcon />
 
                     <Typography
-                      sx={{ position: "absolute", top: "-10px", left: "22px" }}
+                      sx={{ position: "absolute", top: "-10px", left: "26px" }}
                     >
-                      1
+                      {order.length}
                     </Typography>
                   </Box>
                   <BasicPopover

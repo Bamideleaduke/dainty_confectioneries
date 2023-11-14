@@ -20,11 +20,16 @@ const ProductDescription: React.FC = () => {
   const cakeData = data.find((category) =>
     Object.values(category.items).find((item) => item.id === id)
   );
-
+  // const cakeData = data.find((category) =>
+  // Object.values(category.items).find((item) => item.id === id)
+  // ) as CakeProps;
+  
   if (!cakeData) {
     return <Typography>Cake not found</Typography>;
   }
   const cake: CakeProps[] = [cakeData];
+  // const cake: CakeProps[] = [cakeData as CakeProps];
+
   return (
     <Box
       sx={{
@@ -41,7 +46,7 @@ const ProductDescription: React.FC = () => {
         <Grid item sm={6}>
           <Typography variant="h5">Customization Options</Typography>
           <Box sx={{ width: { sm: "80%", md: "60%" }, margin: "2rem 0" }}>
-            <CustomizationForm data={cake} id={id} />
+            <CustomizationForm data={[cakeData]} id={id} />
           </Box>
         </Grid>
         <Grid item sm={6}>

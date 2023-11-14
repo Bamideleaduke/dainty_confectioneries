@@ -9,11 +9,27 @@ import FormControlWrapper from "../shared/forms/FormControlWrapper";
 import { Button } from "../shared/buttons/Buttons";
 import { RouteList } from "../../constants/routes";
 import { useNavigate } from "react-router-dom";
-import { DataProps } from "../../utils/types/ProductDescriptionTypes";
+import { CakeProps, DataProps } from "../../utils/types/ProductDescriptionTypes";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/redux-hook";
+import { CakeItem, addToOrder } from "../../utils/redux/features/cakeSlice";
 
 const CustomizationForm: React.FC<DataProps> = ({ data, id }) => {
+
   const { InputFieldNames } = FormMeta;
   const navigate = useNavigate();
+const dispatch = useAppDispatch()
+  const order = useAppSelector((state) => state.cakeData?.order);
+
+  const addCakeToCart = data
+  .map((item) => Object.values(item.items))
+  .flat()
+  .find((cake: any) => cake.id === id);
+  
+  console.log("id", id)
+  console.log("order", order)
+  console.log("addCakeToCart", addCakeToCart)
+  
+
   const icingOption = [
     { key: "--Please select--", value: "--Please select--" },
     { key: "Hair care", value: "Hair care" },
@@ -95,8 +111,16 @@ const CustomizationForm: React.FC<DataProps> = ({ data, id }) => {
                 }}
               >
                 <Button
+                  type="submit"
                   onClick={() => {
                     navigate(`${RouteList.CART}`);
+                    if (addCakeToCart) {
+                      // order.push(addCakeToCart);
+                      // order = [...order, addCakeToCart];
+                      dispatch(addToOrder(addCakeToCart));
+                    }
+                    // order.push(...(data as CakeProps[]).flatMap(item => Object.values(item.items)));
+                console.log("pushed",order)
                   }}
                 >
                   Add to cart
@@ -111,3 +135,7 @@ const CustomizationForm: React.FC<DataProps> = ({ data, id }) => {
 };
 
 export default CustomizationForm;
+// function useAppSelector(arg0: (state: any) => any) {
+//   throw new Error("Function not implemented.");
+// }
+

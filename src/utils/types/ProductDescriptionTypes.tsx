@@ -22,7 +22,8 @@ export interface CakeProps {
 }
 
 export interface DataProps {
-    data: CakeProps[];
+  data: CakeProps[];
   id?: string
-  selected?:{}
+  selected?: {}
+  // order:[]
 }

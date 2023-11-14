@@ -43,13 +43,14 @@ import CartContainer from "../components/cart/CartContainer";
 import PaystackButton from "react-paystack/dist/paystack-button";
 import Paystack from "../components/payment/Paystack";
 import FlutterWave from "../components/payment/Flutterwave";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const { InputFieldNames } = FormMeta;
   const selectedCakeData = localStorage.getItem("selectedCake");
   const cake = useAppSelector((state) => state.cakeData);
   const dispatch = useAppDispatch();
-
+const navigate= useNavigate()
   let selectedCake: any;
 
   if (selectedCakeData) {
@@ -58,15 +59,15 @@ const CartPage = () => {
     selectedCake = {};
   }
 
-  const [selectedGender, setSelectedGender] = useState("");
+  const [selectDelivery, setSelectDelivery] = useState("");
 
-  const handleGenderChange = (e: any) => {
-    setSelectedGender(e.target.value);
-    console.log(e.target.value);
-  };
+  // const handleGenderChange = (e: any) => {
+  //   setSelectedGender(e.target.value);
+  //   console.log(e.target.value);
+  // };
   const onSubmit = (values: any, { resetForm }: FormikHelpers<any>) => {
     resetForm();
-    values[InputFieldNames.DELIVERY_OR_PICKUP] = selectedGender;
+    values[InputFieldNames.DELIVERY_OR_PICKUP] = selectDelivery;
     values[InputFieldNames.TOTAL] = cake.amount * selectedCake.price;
     const val = {
       ...values,
@@ -226,6 +227,9 @@ const CartPage = () => {
                         minWidth: { xs: "30px", md: "64px" },
                         padding: { xs: "7px", md: "8px 40px" },
                       }}
+                      onClick={()=>{
+              navigate("/products")
+                }}
                     >
                       Continue shopping
                     </Button>

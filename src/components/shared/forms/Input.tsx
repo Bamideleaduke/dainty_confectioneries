@@ -104,6 +104,7 @@ export const Input: React.FC<InputProps> = ({
                     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
                       {
                         // borderColor: field.value ? Colors.Black : "inherit",
+                        color: Colors.Black,
                         border: "none",
                         boxShadow: !backgroundColor
                           ? `0px 0px 2px 1px ${Colors.TextGray}`
