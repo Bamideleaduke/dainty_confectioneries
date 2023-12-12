@@ -30,7 +30,6 @@ interface Config {
 export default function FlutterWave() {
   const navigate = useNavigate();
   const config: Config = {
-    
     public_key: `${process.env.F_AUTH}`,
     tx_ref: Date.now().toString(),
     amount: 100,

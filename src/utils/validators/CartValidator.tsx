@@ -32,4 +32,20 @@ export const cartInitialValue = {
   [InputFieldNames.PHONE_NUMBER]: "",
 };
 
-export const cartValidationSchema = Yup.object().shape({});
+export const cartValidationSchema = Yup.object().shape({
+  [InputFieldNames.QUANTITY]: Yup.string().required("This field is required"),
+  [InputFieldNames.DELIVERY_OR_PICKUP]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.DATE_NEEDED]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.TOTAL]: Yup.string().required("This field is required"),
+  [InputFieldNames.DELIVERY_ADDRESS]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.EMAIL]: Yup.string().required("This field is required"),
+  [InputFieldNames.PHONE_NUMBER]: Yup.string().required(
+    "This field is required"
+  ),
+});

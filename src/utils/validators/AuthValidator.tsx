@@ -35,5 +35,18 @@ export const SignupInitialValue = {
   [InputFieldNames.CONFIRM_PASSWORD]: "",
 };
 
-export const LoginValidationSchema = Yup.object().shape({});
-export const SignupValidationSchema = Yup.object().shape({});
+export const LoginValidationSchema = Yup.object().shape({
+  [InputFieldNames.EMAIL]: Yup.string().required("This field is required"),
+  [InputFieldNames.PASSWORD]: Yup.string().required("This field is required"),
+});
+export const SignupValidationSchema = Yup.object().shape({
+  [InputFieldNames.USERNAME]: Yup.string().required("This field is required"),
+  [InputFieldNames.EMAIL]: Yup.string().required("This field is required"),
+  [InputFieldNames.DELIVERY_ADDRESS]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.PASSWORD]: Yup.string().required("This field is required"),
+  [InputFieldNames.CONFIRM_PASSWORD]: Yup.string().required(
+    "This field is required"
+  ),
+});

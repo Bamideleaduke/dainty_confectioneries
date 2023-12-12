@@ -38,4 +38,31 @@ export const reviewInitialValue = {
   [InputFieldNames.DELIVERY_SERVICE_RATING]: 0,
 };
 
-export const reviewValidationSchema = Yup.object().shape({});
+export const reviewValidationSchema = Yup.object().shape({
+  [InputFieldNames.REVIEW_TITLE]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.YOUR_REVIEW]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.NAME]: Yup.string().required("This field is required"),
+  [InputFieldNames.PHONE_NUMBER]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.MY_OPINION]: Yup.boolean().oneOf(
+    [true],
+    "You must agree to continue"
+  ),
+  [InputFieldNames.RATING]: Yup.number()
+    .required("This field is required")
+    .positive("Rating must be a positive number"),
+  [InputFieldNames.NAVIGATION_RATING]: Yup.number()
+    .required("This field is required")
+    .positive("Rating must be a positive number"),
+  [InputFieldNames.SATISFACTION_RATING]: Yup.number()
+    .required("This field is required")
+    .positive("Rating must be a positive number"),
+  [InputFieldNames.DELIVERY_SERVICE_RATING]: Yup.number()
+    .required("This field is required")
+    .positive("Rating must be a positive number"),
+});

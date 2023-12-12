@@ -32,4 +32,16 @@ export const customizationInitialValue = {
   [InputFieldNames.PERSONALIZED_MESSAGE]: "",
 };
 
-export const customizationValidationSchema = Yup.object().shape({});
+export const customizationValidationSchema = Yup.object().shape({
+  [InputFieldNames.CAKE_FILING]: Yup.string().required(
+    "This field is required"
+  ),
+  [InputFieldNames.SHAPE]: Yup.string().required("This field is required"),
+  [InputFieldNames.ICING_TYPE]: Yup.string().required("This field is required"),
+  [InputFieldNames.FLAVOUR]: Yup.array().required("This field is required"),
+  [InputFieldNames.CAKE_SIZE]: Yup.string().required("This field is required"),
+  [InputFieldNames.COLOUR]: Yup.string().required("This field is required"),
+  [InputFieldNames.PERSONALIZED_MESSAGE]: Yup.string().required(
+    "This field is required"
+  ),
+});
