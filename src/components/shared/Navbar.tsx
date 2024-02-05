@@ -27,7 +27,7 @@ import {
 import { Button } from "./buttons/Buttons";
 import { Colors } from "../../constants/colors";
 import { RouteList } from "../../constants/routes";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import BasicPopover from "./popover/Popover";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/redux-hook";
@@ -60,8 +60,8 @@ const drawerWidth = 240;
 const navData = [
   { id: 1, link: "Home", path: RouteList.LANDING },
   { id: 2, link: "About us", path: RouteList.ABOUT },
-  { id: 4, link: "Contact", path: "..." },
-  { id: 5, link: "Search", path: "..." },
+  { id: 4, link: "Contact", path: "#" },
+  { id: 5, link: "Search", path: "#" },
   // { id: 6, link: "Categories", path: "..." },
 ];
 
@@ -84,7 +84,7 @@ export default function Navbar(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const handleReloadClick = () => {
+  const handleLogOut = () => {
     // (window as any).location.reload(false);
     dispatch(logOut());
   };
@@ -103,7 +103,7 @@ export default function Navbar(props: Props) {
               <ListItemButton sx={{ textAlign: "center" }}>
                 {item.link === "Search" ? (
                   <TextField
-                    id="localSearch"
+                    id="localSearch1"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -184,7 +184,6 @@ export default function Navbar(props: Props) {
       </Box>
     </Box>
   );
-  const navigate = useNavigate();
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -255,7 +254,7 @@ export default function Navbar(props: Props) {
                       >
                         {item.link === "Search" ? (
                           <TextField
-                            id="localSearch"
+                            id="localSearch2"
                             InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -392,7 +391,7 @@ export default function Navbar(props: Props) {
                     content={
                       <Typography
                         sx={{ cursor: "pointer" }}
-                        onClick={() => handleReloadClick()}
+                        onClick={() => handleLogOut()}
                       >
                         Log out
                       </Typography>

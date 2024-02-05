@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { currencyConverter } from "../utils/helper/Function";
-import { Button } from "./shared/buttons/Buttons";
 import { DataProps } from "../utils/types/ProductDescriptionTypes";
 
 const CakeDescription: React.FC<DataProps> = ({
@@ -8,7 +7,6 @@ const CakeDescription: React.FC<DataProps> = ({
   id,
   selected,
 }: DataProps) => {
-  // console.log("cake Description", selected);
   return (
     <Box sx={{ margin: "4rem 0" }}>
       {Object.values(data[0].items).map((item) => {

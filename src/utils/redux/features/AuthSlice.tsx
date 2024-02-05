@@ -36,7 +36,6 @@ export const login = createAsyncThunk<UserProps, LoginCredentials>(
       };
 
       localStorage.setItem("user", JSON.stringify(user));
-      console.log("slice", user);
       return user;
     } else {
       throw new Error("Invalid credentials");
@@ -61,7 +60,6 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.dUser = action.payload;
-        console.log("user", action.payload);
       })
       .addCase(login.rejected, (state) => {
         state.isLoading = false;

@@ -10,7 +10,7 @@ export const InputFieldNames = {
   COLOUR: "colour",
   PERSONALIZED_MESSAGE: "personalized-message",
 } as const;
-const NG_PHONE_PATTERN = /^(\+?234|0|\+?2340)(80|81|90|70|91)\d{8}$/;
+
 
 export interface CustomizationProps {
   [InputFieldNames.CAKE_FILING]: string;
@@ -38,7 +38,7 @@ export const customizationValidationSchema = Yup.object().shape({
   ),
   [InputFieldNames.SHAPE]: Yup.string().required("This field is required"),
   [InputFieldNames.ICING_TYPE]: Yup.string().required("This field is required"),
-  [InputFieldNames.FLAVOUR]: Yup.array().required("This field is required"),
+  [InputFieldNames.FLAVOUR]: Yup.array().min(1, "Select at least one flavor").required("This field is required"),
   [InputFieldNames.CAKE_SIZE]: Yup.string().required("This field is required"),
   [InputFieldNames.COLOUR]: Yup.string().required("This field is required"),
   [InputFieldNames.PERSONALIZED_MESSAGE]: Yup.string().required(

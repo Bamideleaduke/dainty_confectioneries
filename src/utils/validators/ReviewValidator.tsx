@@ -46,9 +46,11 @@ export const reviewValidationSchema = Yup.object().shape({
     "This field is required"
   ),
   [InputFieldNames.NAME]: Yup.string().required("This field is required"),
-  [InputFieldNames.PHONE_NUMBER]: Yup.string().required(
-    "This field is required"
-  ),
+  [InputFieldNames.PHONE_NUMBER]: Yup.string()
+    .required("This field is required")
+    .test(InputFieldNames.PHONE_NUMBER, "Enter valid phone number", (value) =>
+      NG_PHONE_PATTERN.test(value.replaceAll(" ", ""))
+    ),
   [InputFieldNames.MY_OPINION]: Yup.boolean().oneOf(
     [true],
     "You must agree to continue"

@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button } from "../shared/buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-import { RouteList } from "../../constants/routes";
 import * as FormMeta from "../../utils/validators/AuthValidator";
 import InputControl from "../shared/forms/controls/InputControl";
 import { PasswordControl } from "../shared/forms/controls/PasswordControl";
@@ -25,8 +24,7 @@ const LoginForm = ({ setOpen }: any) => {
     // resetForm();
     dispatch(login(values));
     setOpen(false);
-    // if (localStorage.getItem("user")) navigate(`${RouteList.CART}`);
-    // console.log("login", values);
+    
   };
   return (
     <Box
@@ -50,7 +48,6 @@ const LoginForm = ({ setOpen }: any) => {
         onSubmit={onSubmit}
       >
         {(formik) => {
-          // console.log(formik.values);
           return (
             <Form>
               <Box>

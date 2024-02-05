@@ -9,16 +9,11 @@ interface InchSelectionProps {
 }
 
 export function InchSelection(props: InchSelectionProps) {
-  //   const [selectedInch, setSelectedInch] = useState<number | null>(null);
-  const { values, setFieldValue } = useFormikContext();
+  const {  setFieldValue } = useFormikContext();
   const [field] = useField<number | null>(props.name);
   const handleInchClick = (inch: number) => {
-    //   setSelectedInch(inch === selectedInch ? null : inch);
     setFieldValue(props.name, field.value === inch ? null : inch);
-    console.log(inch);
   };
-
-  //   const inches = [9, 6, 10, 14, 16];
 
   return (
     <Box
@@ -35,7 +30,6 @@ export function InchSelection(props: InchSelectionProps) {
           name={props.name}
           key={inch}
           sx={{ padding: "0", minWidth: "30px", margin: "0 0.8rem",  }}
-          //   variant={inch === selectedInch ? "contained" : "outlined"}
           variant={field.value === inch ? "contained" : "outlined"}
           onClick={() => handleInchClick(inch)}
           value={inch}

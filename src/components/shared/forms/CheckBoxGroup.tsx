@@ -19,6 +19,7 @@ export interface CheckBoxGroupProps extends MuiFormGroupProps {
   initialValue?: string | null;
   actionComp?: React.ReactNode[];
   flex?: boolean;
+  // onChange?: (value: string | null) => void;
 }
 
 export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
@@ -28,9 +29,9 @@ export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
   oneOption,
   initialValue,
   flex,
+  // onChange,
   ...props
 }) => {
-  // const [selectedValue, setSelectedValue] = React.useState<string | null>(null);
   const [selectedValue, setSelectedValue] = React.useState<string | null>(
     oneOption ? (initialValue !== undefined ? initialValue : null) : null
   );
@@ -40,17 +41,14 @@ export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
     form: FieldProps["form"]
   ) => {
     const { value, checked } = event.target;
-
     if (oneOption) {
       if (checked) {
-        console.log("select", selectedValue);
-        console.log("value", value);
         setSelectedValue(value);
-        form.setFieldValue(props.name, value);
       } else {
         setSelectedValue(null);
-        form.setFieldValue(props.name, null);
+        // form.setFieldValue(props.name, null);
       }
+      form.setFieldValue(props.name, checked ? value : null);
     } else {
       const currentSelectedValues = form.values[props.name] || [];
       if (checked) {
@@ -79,7 +77,7 @@ export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
               <FormGroup
                 {...props}
                 {...field}
-                id={props.name}
+                id={form.values[props.name]}
                 sx={{
                   display: flex ? "flex" : "initial",
                   flexDirection: "row",
@@ -93,13 +91,10 @@ export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({
                         value={option}
                         control={
                           <Checkbox
-                            id={props.name}
                             name={props.name}
                             sx={{ mr: 1, color: Colors.Primary }}
                             onChange={(e) => {
-                              // console.log("e", e);
-                              // console.log("e.target", e.target.value);
-                              const val = e.target.value;
+                    
                               handleCheckboxChange(e, form);
                             }}
                             value={option}

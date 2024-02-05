@@ -42,7 +42,6 @@ const Products = () => {
           sx={{}}
         >
           {data.map((item, index) => {
-            //   console.log(item.items.cake1.image);
             return (
               <Grid
                 item
@@ -51,11 +50,9 @@ const Products = () => {
                 md={4}
                 key={index}
                 sx={{
-                  //   border: "2px solid yellow",
                   display: "flex",
                   alignItems: "right",
-                  //   width: "100%",
-                  //   width: { sm: "250px", md: "300px" },
+                
                 }}
               >
                 <Box

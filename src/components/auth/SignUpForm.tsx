@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button } from "../shared/buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-import { RouteList } from "../../constants/routes";
 import * as FormMeta from "../../utils/validators/AuthValidator";
 import InputControl from "../shared/forms/controls/InputControl";
 import { PasswordControl } from "../shared/forms/controls/PasswordControl";
@@ -50,19 +49,16 @@ const SignUpForm = ({ setOpenSignup }: any) => {
         onSubmit={onSubmit}
       >
         {(formik) => {
-          // console.log(formik.values);
           return (
             <Form>
               <InputControl
                 name={InputFieldNames.USERNAME}
-                // label={"Username"}
                 placeholder={"Username"}
                 startAdornment={<Username />}
                 backgroundColor
               />
               <InputControl
                 name={InputFieldNames.EMAIL}
-                // label={"Email address"}
                 placeholder={"Email address"}
                 startAdornment={<MailIcon />}
                 backgroundColor
@@ -70,7 +66,6 @@ const SignUpForm = ({ setOpenSignup }: any) => {
               <Box>
                 <PasswordControl
                   name={InputFieldNames.PASSWORD}
-                  // label={""}
                   maxLength={7}
                   placeholder="Password"
                   backgroundColor
@@ -91,16 +86,12 @@ const SignUpForm = ({ setOpenSignup }: any) => {
                 />
                 <Box
                   sx={{
-                    // display: { sm: "flex" },
-                    // alignItems: "center",
-                    // justifyContent: { xs: "center", sm: "center" },
                     marginTop: { xs: "1rem", sm: "2rem" },
                   }}
                 >
                   <Button
                     fullWidth
                     onClick={() => {
-                      // navigate(`${RouteList.CART}`);
                       setOpenDialog(true);
                     }}
                   >

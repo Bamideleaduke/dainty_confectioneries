@@ -9,35 +9,34 @@ import FormControlWrapper from "../shared/forms/FormControlWrapper";
 import { Button } from "../shared/buttons/Buttons";
 import { RouteList } from "../../constants/routes";
 import { useNavigate } from "react-router-dom";
-import { CakeProps, DataProps } from "../../utils/types/ProductDescriptionTypes";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks/redux-hook";
-import { CakeItem, addToOrder } from "../../utils/redux/features/cakeSlice";
+import {
+  DataProps,
+} from "../../utils/types/ProductDescriptionTypes";
+import { useAppDispatch } from "../../utils/hooks/redux-hook";
+import {  addToOrder } from "../../utils/redux/features/cakeSlice";
 
 const CustomizationForm: React.FC<DataProps> = ({ data, id }) => {
-
   const { InputFieldNames } = FormMeta;
   const navigate = useNavigate();
-const dispatch = useAppDispatch()
-  const order = useAppSelector((state) => state.cakeData?.order);
+  const dispatch = useAppDispatch();
 
   const addCakeToCart = data
-  .map((item) => Object.values(item.items))
-  .flat()
-  .find((cake: any) => cake.id === id);
-  
-  console.log("id", id)
-  console.log("order", order)
-  console.log("addCakeToCart", addCakeToCart)
-  
+    .map((item) => Object.values(item.items))
+    .flat()
+    .find((cake: any) => cake.id === id);
 
   const icingOption = [
     { key: "--Please select--", value: "--Please select--" },
-    { key: "Hair care", value: "Hair care" },
-    { key: "Skin care", value: "Skin care" },
-    { key: "Manicure", value: "Manicure" },
+    { key: "classic buttercream", value: "Classic Buttercream" },
+    { key: "Fruit filling", value: "Fruit Fillings" },
+    { key: "almond or nut", value: "Almond or Nut Fillings" },
   ];
   const onSubmit = (values: any, { resetForm }: FormikHelpers<any>) => {
     // resetForm();
+    navigate(`${RouteList.CART}`);
+    if (addCakeToCart) {
+      dispatch(addToOrder(addCakeToCart));
+    }
   };
   return (
     <Formik
@@ -47,7 +46,6 @@ const dispatch = useAppDispatch()
       onSubmit={onSubmit}
     >
       {(formik) => {
-        // console.log(formik.values);
         return (
           <Form>
             <Box>
@@ -102,30 +100,11 @@ const dispatch = useAppDispatch()
                 placeholder="Personalized message on cake"
               />
 
-              <Box
-                sx={{
-                  display: { sm: "flex" },
-                  alignItems: "center",
-                  justifyContent: { xs: "center", sm: "center" },
-                  marginTop: { xs: "1rem", sm: "2rem" },
-                }}
-              >
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    navigate(`${RouteList.CART}`);
-                    if (addCakeToCart) {
-                      // order.push(addCakeToCart);
-                      // order = [...order, addCakeToCart];
-                      dispatch(addToOrder(addCakeToCart));
-                    }
-                    // order.push(...(data as CakeProps[]).flatMap(item => Object.values(item.items)));
-                console.log("pushed",order)
-                  }}
-                >
-                  Add to cart
-                </Button>
-              </Box>
+             
+              <Button type="submit" disabled={!formik.isValid}>
+                Add to cart
+              </Button>
+             
             </Box>
           </Form>
         );
@@ -135,7 +114,4 @@ const dispatch = useAppDispatch()
 };
 
 export default CustomizationForm;
-// function useAppSelector(arg0: (state: any) => any) {
-//   throw new Error("Function not implemented.");
-// }
 

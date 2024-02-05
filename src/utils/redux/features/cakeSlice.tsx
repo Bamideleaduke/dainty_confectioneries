@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import { type } from "@testing-library/user-event/dist/type";
 
 export interface CakeItem {
   id: string;
@@ -51,7 +50,6 @@ const selectedCakeSlice = createSlice({
       localStorage.setItem("selectedCake", JSON.stringify(action.payload));
     },
     addToOrder: (state, action: PayloadAction<CakeItem>) => {
-      console.log("payload order",action.payload)
       state.order.push(action.payload);
     },
     increase: (store, action) => {
@@ -64,12 +62,6 @@ const selectedCakeSlice = createSlice({
       if (cartItems) store.amount = store.amount - 1;
     },
     calculateTotal: (store, action) => {
-      const cartItems = store.selectedCake;
-      // console.log(cartItems);
-      // console.log("cartItem", action.payload);
-      // console.log("total", store.total);
-      // console.log("amount", store.amount);
-      // if (cartItems)
         store.total = action.payload * store.amount;
     },
   },

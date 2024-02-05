@@ -2,22 +2,19 @@ import { Box, Grid, Typography } from "@mui/material";
 import { currencyConverter } from "../utils/helper/Function";
 import { DataProps } from "../utils/types/ProductDescriptionTypes";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../utils/hooks/redux-hook";
+import { useAppDispatch } from "../utils/hooks/redux-hook";
 import { selectCake } from "../utils/redux/features/cakeSlice";
 import { Item } from "./ProductItem";
 
 const RelatedProducts = ({ data, id }: DataProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const selectedCake = useAppSelector((state) => state.cakeData.selectedCake);
-  // console.log("selected cake", selectedCake);
   
   const handleItemClick = (itemId: string) => {
     const selectedCakeItem = data
     .map((item: Item) => Object.values(item.items))
     .flat()
     .find((cake: any) => cake.id === itemId);
-    console.log("related prod",selectedCakeItem?.image)
   if (selectedCakeItem) {
     dispatch(selectCake(selectedCakeItem));
   }

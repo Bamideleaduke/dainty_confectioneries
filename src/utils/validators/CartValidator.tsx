@@ -23,7 +23,7 @@ export interface CartProps {
 }
 
 export const cartInitialValue = {
-  [InputFieldNames.QUANTITY]: "",
+  [InputFieldNames.QUANTITY]: 1,
   [InputFieldNames.DELIVERY_OR_PICKUP]: "",
   [InputFieldNames.DATE_NEEDED]: "",
   [InputFieldNames.TOTAL]: "",
@@ -40,12 +40,14 @@ export const cartValidationSchema = Yup.object().shape({
   [InputFieldNames.DATE_NEEDED]: Yup.string().required(
     "This field is required"
   ),
-  [InputFieldNames.TOTAL]: Yup.string().required("This field is required"),
+  // [InputFieldNames.TOTAL]: Yup.string().required("This field is required"),
   [InputFieldNames.DELIVERY_ADDRESS]: Yup.string().required(
     "This field is required"
   ),
   [InputFieldNames.EMAIL]: Yup.string().required("This field is required"),
-  [InputFieldNames.PHONE_NUMBER]: Yup.string().required(
-    "This field is required"
+  [InputFieldNames.PHONE_NUMBER]: Yup.string()
+  .required("This field is required")
+  .test(InputFieldNames.PHONE_NUMBER, "Enter valid phone number", (value) =>
+    NG_PHONE_PATTERN.test(value.replaceAll(" ", ""))
   ),
 });

@@ -25,7 +25,6 @@ const ReviewForm = () => {
         onSubmit={onSubmit}
       >
         {(formik) => {
-          console.log(formik.values);
           return (
             <Form>
               <Box>

@@ -9,30 +9,17 @@ import {
 } from "@mui/material";
 import { Formik, Form, FormikHelpers } from "formik";
 import * as FormMeta from "../utils/validators/Customization";
-import { useNavigate } from "react-router-dom";
-import { InchSelection } from "../components/InchSelection";
-import FormControlWrapper from "../components/shared/forms/FormControlWrapper";
-import CheckboxControl from "../components/shared/forms/controls/CheckboxControl";
 import InputControl from "../components/shared/forms/controls/InputControl";
-import SelectControl from "../components/shared/forms/controls/SelectControl";
-import { RouteList } from "../constants/routes";
-import { DataProps } from "../utils/types/ProductDescriptionTypes";
 import { Button } from "./shared/buttons/Buttons";
 
 const Checkout: React.FC = () => {
   const { InputFieldNames } = FormMeta;
-  const navigate = useNavigate();
   const [selectedGender, setSelectedGender] = useState("");
 
   const handleGenderChange = (event: any) => {
     setSelectedGender(event.target.value);
   };
-  const icingOption = [
-    { key: "--Please select--", value: "--Please select--" },
-    { key: "Hair care", value: "Hair care" },
-    { key: "Skin care", value: "Skin care" },
-    { key: "Manicure", value: "Manicure" },
-  ];
+
   const onSubmit = (values: any, { resetForm }: FormikHelpers<any>) => {
     resetForm();
   };
@@ -44,7 +31,6 @@ const Checkout: React.FC = () => {
       onSubmit={onSubmit}
     >
       {(formik) => {
-        console.log(formik.values);
         return (
           <Form>
             <Box>

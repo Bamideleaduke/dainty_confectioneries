@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { data } from "../resources/Data";
-import { Colors } from "../constants/colors";
 import CustomizationForm from "../components/CustomizationForm/CustomizationForm";
 import RelatedProducts from "../components/RelatedProducts";
 import CakeDescription from "../components/CakeDescription";
@@ -12,7 +11,6 @@ import { useAppSelector } from "../utils/hooks/redux-hook";
 const ProductDescription: React.FC = () => {
   const { id } = useParams();
   const selectedCake = useAppSelector((state) => state.cakeData.selectedCake);
-  selectedCake ?? console.log("selected cake", selectedCake);
  
   if (!id) {
     return <Typography>No ID provided</Typography>;
@@ -20,15 +18,12 @@ const ProductDescription: React.FC = () => {
   const cakeData = data.find((category) =>
     Object.values(category.items).find((item) => item.id === id)
   );
-  // const cakeData = data.find((category) =>
-  // Object.values(category.items).find((item) => item.id === id)
-  // ) as CakeProps;
+ 
   
   if (!cakeData) {
     return <Typography>Cake not found</Typography>;
   }
   const cake: CakeProps[] = [cakeData];
-  // const cake: CakeProps[] = [cakeData as CakeProps];
 
   return (
     <Box

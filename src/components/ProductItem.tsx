@@ -1,19 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { currencyConverter } from "../utils/helper/Function";
-import { useAppDispatch, useAppSelector } from "../utils/hooks/redux-hook";
+import { useAppDispatch } from "../utils/hooks/redux-hook";
 import { selectCake } from "../utils/redux/features/cakeSlice";
 import { CakeItem } from "../utils/types/ProductDescriptionTypes";
 
-// export interface Cake {
-//   id: string;
-//   type: string;
-//   price: number;
-//   image: string;
-//   description?: {
-//     // ...
-//   };
-// }
+
 
 export interface Item {
   category: string;
@@ -23,8 +15,6 @@ export interface Item {
 const ProductItem = ({ data }: any) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const selectedCake = useAppSelector((state) => state.cakeData.selectedCake);
-  // console.log("selected cake", selectedCake);
 
   const handleItemClick = (itemId: string) => {
     const selectedCakeItem = data
@@ -34,7 +24,6 @@ const ProductItem = ({ data }: any) => {
 
     if (selectedCakeItem) {
       dispatch(selectCake(selectedCakeItem));
-      // localStorage.setItem("selectedCake", JSON.stringify(selectedCakeItem));
     }
     navigate(`/product-description/${itemId}`);
   };

@@ -59,8 +59,8 @@ export const SelectInput: React.FC<SelectProps> = ({
                   )
                 }
               >
-                {options.map((option) => (
-                  <MenuItem value={option.value} key={option.value}>
+                {options.map((option,index) => (
+                  <MenuItem value={option.value} key={option.value}  disabled={index === 0} >
                     {option.key}
                   </MenuItem>
                 ))}

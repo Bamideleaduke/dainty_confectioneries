@@ -9,7 +9,6 @@ export const InputFieldNames = {
   CONFIRM_PASSWORD: "confirm-password",
 } as const;
 
-const NG_PHONE_PATTERN = /^(\+?234|0|\+?2340)(80|81|90|70|91)\d{8}$/;
 
 export interface LoginProps {
   [InputFieldNames.EMAIL]: string;

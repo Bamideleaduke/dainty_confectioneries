@@ -9,7 +9,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { currencyConverter } from "../../utils/helper/Function";
 import Counter from "../Counter";
 interface cartProp {
