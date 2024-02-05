@@ -22,8 +22,7 @@ interface Config {
 
 
 export const config: Config = {
-  // public_key: `${process.env.F_AUTH}`,
-  public_key: `FLWPUBK_TEST-beffe1633d94c3fa085d40ce806e8bb4-X`,
+  public_key: `${process.env.F_AUTH}`,
   tx_ref: Date.now().toString(),
   amount: 100,
   currency: "NGN",

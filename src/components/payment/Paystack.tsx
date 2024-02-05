@@ -29,7 +29,7 @@ const config = {
   reference: new Date().getTime().toString(),
   email: "user@example.com",
   amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-  publicKey: "pk_test_dsdfghuytfd2345678gvxxxxxxxxxx",
+  publicKey: process.env.P_SECRET_KEY,
 };
 
 function Paystack() {
